@@ -1,0 +1,52 @@
+﻿.content
+{
+    margin:10px;
+    width:1040px;
+    height:700px;
+    font-size: 12px;
+}
+.info{
+    margin-top:20px;
+    margin-left:20px;
+    font-size: 14px;
+}
+.info ul li{
+    margin-bottom:40px;
+}
+
+.info ul li p {
+    margin-left:40px;
+}
+
+.info table {
+    width:450px;
+	border: 0px;
+	border-collapse: collapse;
+    text-align:center;
+}
+.info table tr {
+	padding: 8px;
+}
+.info table td {
+	padding: 8px;
+}
+
+.info table td input,.info table td textarea {
+	width:250px;
+}
+
+.btn {
+	border:none;
+	cursor:pointer;
+	font-size:16px;
+	vertical-align:middle;
+}
+.btn-default{
+	background:#e61e25;
+	color:#fff;
+	height:30px;
+	width:80px
+}
+.btn-default:hover,.btn-small:hover {
+	background:#f72f36
+}

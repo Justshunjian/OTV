@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "弹幕管理";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#tabs").tabs();
+
+        getDmsData();
+        
+        $("#dmButton").click(function () {
+            var value = $("#dm_count").val();
+
+            var regx = /^[0-9]*[1-9][0-9]*$/;
+            if (!regx.test(value)) {
+                layer.msg("必须是正整数的数字", {
+                    icon: 5,
+                    time: 2000
+                });
+                $("#dm_count").focus();
+                return;
+            }
+            var count = parseInt(value);
+            if (count < 10 || count > 40) {
+                layer.msg("必须在10-40之间", {
+                    icon: 5,
+                    time: 2000
+                });
+                $("#dm_count").focus();
+                return;
+            }
+
+            layer.msg('数据提交中...', { icon: 16 });
+            $.ajax({
+                url: head + "/DanMu/Setting",
+                type: "POST",
+                dataType: "json",
+                data: { Count: count},
+                success: function (res) {
+                    layer.closeAll();
+                    if (res == "ok") {
+                        layer.msg('修改成功', {
+                            icon: 1,
+                            time: 2000
+                        });
+                    } else {
+                        layer.msg(res, {
+                            icon: 2,
+                            time: 3000
+                        });
+                    }
+                },
+                error: function (data) {
+                    layer.closeAll();
+                    layer.msg("服务器繁忙！", {
+                        icon: 5,
+                        time: 3000
+                    });
+                }
+            });
+
+        });
+    });
+
+
+</script>
+<div id="tabs" class="content">
+    <ul>
+        <li><a href="#con_one_1" id="one1">弹幕预置列表</a></li>
+        <li><a href="#con_one_2" id="one2">弹幕设置</a></li>
+    </ul>
+    <div>
+        <div id="con_one_1">
+            <div>
+                <table id="dm_jqGrid"></table>
+                <div id="dm_jqGridPager"></div>
+            </div>
+        </div>
+        <div id="con_one_2">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>
+                            弹幕获取个数设置:
+                        </td>
+                        <td>
+                            <input type="text" name="dm_count" id="dm_count" value="@ViewBag.Count" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <button class="btn btn-default" id="dmButton">提交</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

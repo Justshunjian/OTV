@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "过滤管理";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#tabs").tabs();
+
+        getFiltersData();
+        
+    });
+
+
+</script>
+<div id="tabs" class="content">
+    <ul>
+        <li><a href="#con_one_1" id="one1">过滤列表</a></li>
+    </ul>
+    <div>
+        <div id="con_one_1">
+            <div>
+                <table id="filter_jqGrid"></table>
+                <div id="filter_jqGridPager"></div>
+            </div>
+        </div>
+    </div>
+</div>

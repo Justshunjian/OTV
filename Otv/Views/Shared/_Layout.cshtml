@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title-OTV</title>
+    <link href="~/otv.ico" rel="shortcut icon" type="image/x-icon" />    
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/jquery-ui.css")
+    @Styles.Render("~/Content/common.css")
+    @Styles.Render("~/Content/index.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery-1.9.2.min.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.9.2.min.js")
+    @Scripts.Render("~/Scripts/newstop.js")
+    @Scripts.Render("~/Scripts/layer/layer.js")
+    @Scripts.Render("~/Scripts/user.js")
+    <!-- This is the Javascript file of jqGrid -->
+    @Scripts.Render("~/Scripts/jqgrid/js/jquery.jqGrid.min.js")
+    <!-- This is the localization file of the grid controlling messages, labels, etc.
+    <!-- We support more than 40 localizations -->
+    @Scripts.Render("~/Scripts/jqgrid/js/i18n/grid.locale-cn.js")
+    <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+    @Styles.Render("~/Content/themes/base/jquery-ui.css")
+    <!-- The link to the CSS that the grid needs -->
+    @Styles.Render("~/Scripts/jqgrid/css/ui.jqgrid.css")
+
+    <!-- ext js & css -->
+    @Scripts.Render("~/Scripts/jqgrid/codetabs.js")
+    @Scripts.Render("~/Scripts/jqgrid/prettify.js")
+    @Styles.Render("~/Scripts/jqgrid/prettify.css")
+
+    @Styles.Render("~/Content/user.css")
+    
+</head>
+
+<body>
+    <div class="N-wp index-wp">
+        <div class="N-tp">
+            <div class="N-top N-top_nav " bk="top_nav">
+                <div class="N-topc">
+                    <ul class="N-top-nav">
+                        <li>OTV管理系统 欢迎您: @ViewBag.LoginUser</li>
+                    </ul>
+                    <div class="N-topr">
+                        <div class="calendar">
+                            <span class="calendar-day"></span>
+                            <span class="calendar-week"></span>
+                        </div><!--end calendar-->
+                        <div class="userinfo">
+                            <span class="user-Name" style="font-size:13px">
+                                @Html.ActionLink("注销","Logout","Account")
+                            </span>
+                        </div><!--end userinfo-->
+                    </div>
+                </div><!--end N-topc-->
+            </div>
+        </div><!--end N-tp-->
+        <div class="N-hd">
+
+        </div><!--end N-hd-->
+        <!--end N-tp-->
+        <div class="N-hd">
+        </div>
+        <!--end N-hd-->
+        <div class="N-bd">
+            <div class="N-row N-row_100_640_380 " bk="row_100_640_380">
+                <div class="N-col N-w100">
+                    <div class="N-module N-module_nav N-nav" bk="module_nav">
+                        <ul>
+                            <li>@Html.ActionLink("账户管理", "Index","Manager")</li>
+                            <li>@Html.ActionLink("客户端统计", "Index", "Clients")</li>
+                            <li>@Html.ActionLink("节目管理", "Index", "Channel")</li>
+                            <li>@Html.ActionLink("统计管理", "Index", "Record")</li>
+                            <li>@Html.ActionLink("过滤管理", "Index", "Filter")</li>
+                            <li>@Html.ActionLink("弹幕管理", "Index", "DanMu")</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="N-col N-w770">
+                    <div>
+                        @RenderBody()
+                    </div>
+                </div>
+                <div class="N-w380">
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+    </div><!--end N-wp-->
+    <div style="clear: both; padding: 15px 0px; text-align: center;">
+        <span>Copyright © @DateTime.Now.Year, 仅内部测试所用</span>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

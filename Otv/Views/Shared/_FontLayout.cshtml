@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title-OTV</title>
+    <link href="~/otv.ico" rel="shortcut icon" type="image/x-icon" />    
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/login.css")
+    @Styles.Render("~/Content/ucenter.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery-1.9.2.min.js")
+    @Scripts.Render("~/Scripts/jquery-ui-1.9.2.min.js")
+    @Scripts.Render("~/Scripts/newstop.js")
+    @Scripts.Render("~/Scripts/layer/layer.js")
+    @Scripts.Render("~/Scripts/user.js")
+</head>
+
+<body>
+    @*@RenderSection("featured", required: false)*@
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,127 @@
+﻿@model Otv.Models.LoginModel
+@{
+    Layout = "~/Views/Shared/_FontLayout.cshtml";
+}
+@{
+    ViewBag.Title = "登录";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#VerificationCode").blur(function () {
+            var val = $("#VerificationCode").val();
+            if (val.length == 0) {
+                layer.msg("请输入验证码！", {
+                    icon: 5,
+                    time: 2000 //1秒关闭（如果不配置，默认是3秒）
+                });
+            } else {
+                $.ajax({
+                    url: head+"/Account/valCodeCheck",
+                    type: "POST",
+                    data: {},
+                    success: function (res) {
+                        if (res.toLowerCase() != val.toLowerCase()) {
+                            layer.msg("验证码输入错误！", {
+                                icon: 2,
+                                time: 2000 //1秒关闭（如果不配置，默认是3秒）
+                            });
+                            $("#VerificationCodeImg").click();
+                            $("#VerificationCode").val("");
+                            $("#VerificationCode").focus();
+                        }
+                    },
+                    error: function (data) {
+                        layer.msg("服务器繁忙！", {
+                            icon: 5,
+                            time: 2000 //1秒关闭（如果不配置，默认是3秒）
+                        });
+                    }
+                })
+            }
+        });
+
+        $("#VerificationCodeImg").click(function () {
+            $("#VerificationCodeImg").attr("src", head + "/Account/RandomCode");
+        });
+    });
+</script>
+<div class="N-wp">
+    <div class="N-top">
+        <div class="N-topc">
+            <ul class="N-top-nav" bk="top_nav">
+                <li>欢迎登陆OTV管理系统</li>
+            </ul>
+            <div class="N-topr">
+                <div class="calendar">
+                    <span class="calendar-day"></span>
+                    <span class="calendar-week"></span>
+                </div><!--end calendar-->
+            </div>
+        </div><!--end N-topc-->
+    </div><!--end N-top-->
+    <div class="U-w886">
+        <h2>登录</h2>
+        <div class="form-list login-box">
+            @*<form action="/Account/Login" method="post">*@
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <span style="color:red">@Html.ValidationSummary(true)</span>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" class="ipt w346" name="User" placeholder="用户名" reqmsg="用户名" maxlength="20">
+                            </td>
+                            <td class="w100">@Html.ValidationMessageFor(model => model.User)</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="password" name="Pwd" class="ipt w346" placeholder="密码" reqmsg="密码">
+                            </td>
+                            <td class="w100">@Html.ValidationMessageFor(model => model.Pwd)</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" id="VerificationCode" name="VerificationCode" class="ipt w346" placeholder="验证码" reqmsg="验证码">
+                            </td>
+                            <td>
+                                <img id="VerificationCodeImg" src="~/Account/RandomCode" style="width:100px;height:33px;" title="看不清，换一张" />
+                            </td>
+                            <td class="w100">@Html.ValidationMessageFor(model => model.VerificationCode)</td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="w358">
+                                    <div class="fr login-fr">
+                                        @Html.ActionLink("忘记密码？", "Reset", "Account", null, new { target = "_self" })
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="submit" class="btn btn-default">立即登录</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div><!--end login-box-->
+    </div><!--end U-w886-->
+    <div class="N-ft">
+        <div class="N-ftc">
+            <ul>
+                <li>
+                    <p>Copyright © @DateTime.Now.Year, 仅内部测试所用</p>
+                </li>
+            </ul>
+        </div>
+    </div><!--end N-ft-->
+</div><!--end N-wp-->
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

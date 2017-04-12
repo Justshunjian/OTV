@@ -1,0 +1,104 @@
+﻿@model Otv.Models.T_User
+@{
+    ViewBag.Title = "账户管理";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#tabs").tabs();
+
+        $("#infoButton").click(function () {
+            infoModify();
+        })
+
+        $("#pwdButton").click(function () {
+            resetPwd();
+        })
+    });
+
+
+</script>
+<div id="tabs" class="content">
+    <ul>
+        <li><a href="#con_one_1" id="one1">账户信息</a></li>
+        <li><a href="#con_one_2" id="one2">信息修改</a></li>
+        <li><a href="#con_one_3" id="one3">密码修改</a></li>
+    </ul>
+    <div>
+        <input hidden="hidden" name="User" id="User" value="@Model.User" />
+        <div id="con_one_1">
+            <div class="info">
+                <ul>
+                    <li>账户名:@Model.User</li>
+                    <li>邮箱:@Model.Email</li>
+                    <li>最后登录时间:@Model.LastLoginDate</li>
+                    <li>注册时间:@Model.CreateDate</li>
+                    <li>简介:<p>@Model.Desc</p></li>
+                </ul>
+            </div>
+        </div>
+        <div id="con_one_2">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>
+                            邮箱
+                        </td>
+                        <td>
+                            <input type="text" id="Email" name="Email" class="ipt w346" value="@Model.Email" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            简介
+                        </td>
+                        <td>
+                            <textarea id="Desc" name="Desc" class="ipt w346" rows="10">@Model.Desc</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button class="btn btn-default" id="infoButton">确认修改</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="con_one_3">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>
+                            原密码
+                        </td>
+                        <td>
+                            <input type="password" id="OldPwd" name="OldPwd" class="ipt w346" placeholder="原密码" reqmsg="原密码" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            新密码
+                        </td>
+                        <td>
+                            <input type="password" id="NewPwd" name="NewPwd" class="ipt w346" placeholder="新密码" reqmsg="新密码" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            确认密码
+                        </td>
+                        <td>
+                            <input type="password" id="PreNewPwd" name="PreNewPwd" class="ipt w346" placeholder="确认密码" reqmsg="确认密码" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button class="btn btn-default" id="pwdButton">确认修改</button>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

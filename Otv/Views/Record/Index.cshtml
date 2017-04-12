@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "统计管理";
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#tabs").tabs();
+
+        $("#one1").click(function () {
+            getDanmuData();
+        });
+
+
+        $("#one1").click();
+    });
+
+
+</script>
+<div id="tabs" class="content">
+    <ul>
+        <li><a href="#con_one_1" id="one1">弹幕记录</a></li>
+    </ul>
+    <div>
+        <div id="con_one_1">
+            <div>
+                <table id="dm_jqGrid"></table>
+                <div id="dm_jqGridPager"></div>
+            </div>
+        </div>
+    </div>
+</div>

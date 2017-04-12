@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "客户端统计";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#tabs").tabs();
+
+        $("#refresh").click(function () {
+            layer.msg('刷新中...', { icon: 16 });
+            $.ajax({
+                url: head + "/Clients/Refresh",
+                type: "POST",
+                dataType: "json",
+                data: {},
+                success: function (res) {
+                    layer.closeAll();
+                    if (res.state == "ok") {
+                        $("#stb").html(res.stb);
+                        $("#phone").html(res.phone);
+                        layer.msg('更新成功', {
+                            icon: 1,
+                            time: 1000
+                        });
+                    } else {
+                        layer.msg(res, {
+                            icon: 2,
+                            time: 3000
+                        });
+                    }
+                },
+                error: function (data) {
+                    layer.closeAll();
+                    layer.msg("服务器繁忙！", {
+                        icon: 5,
+                        time: 3000
+                    });
+                }
+            });
+
+        });
+    });
+
+
+</script>
+<div id="tabs" class="content">
+    <ul>
+        <li><a href="#con_one_1" id="one1">客户端统计</a></li>
+    </ul>
+    <div>
+        <div id="con_one_1">
+            <div class="info">
+                <table>
+                    <tr>
+                        <td>
+                            机顶盒统计量:
+                        </td>
+                        <td>
+                            <span id="stb">@ViewBag.stb</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            手机统计量:
+                        </td>
+                        <td>
+                            <span id="phone">@ViewBag.phone</span>
+                        </td>
+                    </tr>
+                </table>
+                <div style="margin-top:60px;margin-left:250px">
+                        <button class="btn btn-default" id="refresh">刷新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
